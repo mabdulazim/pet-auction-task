@@ -1,0 +1,81 @@
+.bid-card-container {
+    background: #121519;
+    display: flex;
+    align-items: center;
+    min-height: 100px;
+    padding: 20px;
+
+    .bid-user {
+        display: flex;
+
+        .bid-user-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #2a8ffa;
+            margin-right: 10px;
+    
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+            }
+        }
+
+        .bid-user-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            span {
+                display: block;
+            }
+            span:first-child {
+                color: #2a8ffa;
+                margin-bottom: 5px;
+            }
+            span:last-child {
+                color: #fff;
+            }
+        }    
+
+    }
+
+    .bid-status {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 100%;
+        
+        .bid-next-time-status {
+            color: #fe6543;
+            font-size: 2em;
+        }   
+    
+        .bid-winner-status {
+            color: #1f9b12;
+            font-size: 2em;
+        }   
+    }
+
+}
+
+
+@media (max-width: 599px) {
+  
+    .bid-user {
+        justify-content: center;
+    }
+
+    .bid-status {
+        justify-content: center !important;
+    }
+
+    .MuiGrid-container {
+        flex-direction: column-reverse;
+    }
+
+    .second-nav-container {
+        display: none;
+    }
+}

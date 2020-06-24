@@ -1,0 +1,52 @@
+.first-nav-container {
+    background-color: #121519;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+
+    .first-nav {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%;
+        margin: 0 60px;
+    }
+
+    .companyLogo {
+        width: 200px;
+        height: 40px;
+        color: #dcdcdc;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+    }
+
+    .menu-mobile-open-icon {
+        color: #fff;
+        font-size: 24px;
+        display: flex;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+}
+
+@media (min-width: 600px) {
+
+    .menu-mobile-open-icon {
+        display: none !important;
+    }
+}
+
+@media (max-width: 599px) {
+
+    .social-container {
+        display: none !important;
+    }
+    .menu-mobile-open-icon {
+        display: flex;
+    }
+}

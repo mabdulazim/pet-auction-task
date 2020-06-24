@@ -1,0 +1,48 @@
+.second-nav-container {
+    background-color: #161a1f;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+
+    .second-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        margin: 0 60px;
+
+        .menu-container {
+            .menu {
+                list-style: none;
+                display: flex;
+                justify-content: space-around;
+                padding: 0;
+
+                li.active {
+                    a { color : #288ffa}
+                }
+
+                li {
+                    padding: 10px 20px;
+                    a {
+                        color: #fff;
+                    }
+                }
+
+                li:first-child {
+                    padding: 10px 20px 10px 0;
+                }
+            }
+        }
+
+    }
+}
+
+@media (max-width: 599px) {
+
+    .second-nav-container {
+        display: none;
+    }
+}

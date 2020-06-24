@@ -1,0 +1,43 @@
+
+.profile-container {
+    width: 200px;
+    height: 40px;
+    display: flex;
+
+    .profile-img {
+        background: #eee;
+        width: 38px;
+        height: 38px;
+        border: 1px solid #288ffa;
+        border-radius: 4px;
+        margin-right: 10px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+        }
+    }
+                
+    .profile-info {
+        width: calc(100% - 50px);
+
+        span {
+            display: block;
+            text-overflow: ellipsis;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        span:first-child {
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        span:last-child {
+            color: #707070;
+        }
+    }
+
+}
