@@ -2,6 +2,8 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import './BidCard.scss';
 import userPhoto from '../../assets/images/user.jpg';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function BidCard({ bid : { user : { name, amount_money } }, isWinner }) {
 
@@ -13,6 +15,11 @@ function BidCard({ bid : { user : { name, amount_money } }, isWinner }) {
             <div className="bid-user">
                 <div className="bid-user-image">
                     <img src={userPhoto} alt={name} />
+                    {isWinner && 
+                        <span className="bid-user-image-winner-icon">
+                            <FontAwesomeIcon icon={faStar} />
+                        </span>
+                    }
                 </div>
                 <div className="bid-user-info">
                     <span>{ amount_money }$</span>
