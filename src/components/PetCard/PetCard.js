@@ -6,20 +6,17 @@ import API from '../../utils/api';
 import { Link } from 'react-router-dom';
 
 function PetCard({pet : { id, name, type, url, owner }, showOwner}) {
+  // STATES
+  const [isLoading, setIsLoading] = useState(false);
   const [showBidForm, setShowBidForm] = useState(false);
   const [bidName, setBidName] = useState("");
   const [bidAmount, setBidAmount] = useState("");
-
   const [validationErrors, setValidationErrors] = useState({
     name: "",
     amount: "",
   });
 
-  const handleBidForm = () => {
-    setShowBidForm(oldValue => !oldValue);
-  }
-
-  const handleInputs = (e) => {
+  const handleInputsChange = (e) => {
     switch (e.target.name) {
       case 'name':
         setBidName(e.target.value);
@@ -35,6 +32,34 @@ function PetCard({pet : { id, name, type, url, owner }, showOwner}) {
   }
 
   const handleBidSubmit = () => {
+
+    // APPLY VALIDATION
+    const IsValid = handleInputsValidation();
+    if(!IsValid) return false;
+
+    // LOADING
+    setIsLoading(true);
+
+    // SEND API REQUEST
+    API("POST", `bids/${id}`, {}, {
+      bid : {
+        user : {
+          name: bidName,
+          amount_money: bidAmount
+        }
+      }
+    }).then(res => {
+      if(res.status === 200) {
+        toastr.success('Submitted Successfully', 'Bid', { timeOut: 3000 });
+        setShowBidForm(false); // HIDE FORM
+        setBidName(""); // CLEAR STATE
+        setBidAmount(""); // CLEAR STATE
+        setIsLoading(false); // REMOVE LOADER
+      }
+    });
+  }
+
+  const handleInputsValidation = () => {
     if(bidName === "") {
       setValidationErrors(oldValue => ({...oldValue, name : "name is required" }));
       return false;
@@ -47,20 +72,7 @@ function PetCard({pet : { id, name, type, url, owner }, showOwner}) {
       setValidationErrors(oldValue => ({...oldValue, amount : "amount should be greater than 0" }));
       return false;
     }
-    
-    API("POST", `bids/${id}`, {}, {
-      bid : {
-        user : {
-          name: bidName,
-          amount_money: bidAmount
-        }
-      }
-    }).then(res => {
-      if(res.status === 200) {
-        toastr.success('Submitted Successfully', 'Bid', { timeOut: 3000 });
-        setShowBidForm(false);
-      }
-    });
+    return true;
   }
 
   return (
@@ -75,16 +87,20 @@ function PetCard({pet : { id, name, type, url, owner }, showOwner}) {
             <div className="bid-form">
 
               <div className="bid-input-group">
-                <input type="text" name="name" placeholder="Name" onChange={handleInputs} />
-                {validationErrors && validationErrors.name !== "" ? <span className="input-error">{validationErrors.name}</span> : ''}
+                <input disabled={isLoading ? true : false} type="text" name="name" placeholder="Name" onChange={handleInputsChange} />
+                {validationErrors && validationErrors.name !== "" && <span className="input-error">{validationErrors.name}</span> }
               </div>
 
               <div className="bid-input-group">
-                <input type="number" min="0" name="money" placeholder="Money Amount" onChange={handleInputs} />
+                <input disabled={isLoading ? true : false} type="number" min="0" name="money" placeholder="Money Amount" onChange={handleInputsChange} />
                 {validationErrors && validationErrors.amount !== "" && <span className="input-error">{validationErrors.amount}</span>  }
               </div>  
 
-              <button onClick={handleBidSubmit}>PARTICIPATE</button>
+              {isLoading ? 
+                <div class="bid-form-loader"></div> 
+              :  
+                <button onClick={handleBidSubmit}>PARTICIPATE</button>
+              }
             
             </div>
         </div>
@@ -107,7 +123,7 @@ function PetCard({pet : { id, name, type, url, owner }, showOwner}) {
         </div>
       </div>
 
-      <button className="pet-card-btn" onClick={handleBidForm}>
+      <button className="pet-card-btn" onClick={() => setShowBidForm(oldValue => !oldValue) }>
         BID
       </button>
     </div>
