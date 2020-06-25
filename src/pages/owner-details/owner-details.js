@@ -31,6 +31,8 @@ function OwnerDetails(props) {
         <OwnerCard owner={owner} />
 
         <h1 className="page-title">Owned Pets</h1>
+
+        {pets.length === 0 && <div className="no-results"> No Results !</div>}
         
         <Grid container spacing={10}>
         {pets.map(pet => {

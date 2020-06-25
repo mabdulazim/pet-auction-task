@@ -19,10 +19,10 @@ function PetDetails(props) {
     });
   }, []);
 
-  const findWinner = (bids) => {
+  const findWinner = async (bids) => {
     let tempWinnerAmount = 0;
-    bids.forEach(bid => {
-      if(bid.user.amount_money > tempWinnerAmount) {
+    await bids.forEach(bid => {
+      if(Number(bid.user.amount_money) > Number(tempWinnerAmount)) {
         tempWinnerAmount = bid.user.amount_money;
       }
     });
@@ -39,6 +39,9 @@ function PetDetails(props) {
         <h1 className="page-title">Final Result</h1>
         
         <div style={{borderRadius: '4px', borderTop: '4px solid #2a8ffa' }}>
+
+          {bids.length === 0 && <div className="no-results"> No Results !</div>}
+          
           <Grid container spacing={0}>
             {bids.map((bid, i) => {
               return (
@@ -52,6 +55,7 @@ function PetDetails(props) {
             })
             }
           </Grid>
+
         </div>
 
       </Fragment>

@@ -23,6 +23,15 @@ a {
     margin: 50px auto;
 }
 
+.no-results { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: #fff;
+    margin: 20px;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }

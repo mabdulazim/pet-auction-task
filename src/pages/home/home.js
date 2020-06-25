@@ -24,6 +24,8 @@ function Home() {
 
         <h1 className="page-title">Explore all pets</h1>
         
+        {pets.length === 0 && <div className="no-results"> No Results !</div>}
+
         <Grid container spacing={10}>
         {pets.map(pet => {
           return (
